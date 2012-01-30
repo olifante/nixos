@@ -17,6 +17,7 @@
     # file system.
     #
     # "ext4" "ata_piix"
+    "ext3"
   ];
 
   boot.loader.grub = {
@@ -25,11 +26,11 @@
     version = 2;
 
     # Define on which hard drive you want to install Grub.
-    # device = "/dev/sda";
+    device = "/dev/sda";
   };
 
   networking = {
-    # hostName = "nixos"; # Define your hostname.
+    hostName = "nixos"; # Define your hostname.
     interfaceMonitor.enable = true; # Watch for plugged cable.
     enableWLAN = true;  # Enables Wireless.
   };
@@ -40,9 +41,11 @@
   fileSystems = [
     # Mount the root file system
     #
-    # { mountPoint = "/";
-    #   device = "/dev/sda2";
-    # }
+    { mountPoint = "/";
+        device = "/dev/sda1";
+        fsType = "ext3";      # the type of the partition.
+        options = "data=journal";
+    }
 
     # Copy & Paste & Uncomment & Modify to add any other file system.
     #
@@ -57,7 +60,7 @@
   swapDevices = [
     # List swap partitions that are mounted at boot time.
     #
-    # { device = "/dev/sda1"; }
+    { device = "/dev/sda2"; }
   ];
 
   # Select internationalisation properties.
@@ -76,11 +79,11 @@
   # services.printing.enable = true;
 
   # Add XServer (default if you have used a graphical iso)
-  # services.xserver = {
-  #   enable = true;
-  #   layout = "us";
-  #   xkbOptions = "eurosign:e";
-  # };
+  services.xserver = {
+    enable = true;
+    layout = "us";
+    xkbOptions = "eurosign:e";
+  };
 
   # Add the NixOS Manual on virtual console 8
   services.nixosManual.showManual = true;
