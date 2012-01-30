@@ -83,6 +83,8 @@
     enable = true;
     layout = "us";
     xkbOptions = "eurosign:e";
+
+    desktopManager.xfce.enable = true;
   };
 
   # Add the NixOS Manual on virtual console 8
