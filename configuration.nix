@@ -83,11 +83,14 @@
     enable = true;
     layout = "us";
     xkbOptions = "eurosign:e";
-
+    videoDriver = "virtualbox";
     desktopManager.xfce.enable = true;
   };
 
   # Add the NixOS Manual on virtual console 8
   services.nixosManual.showManual = true;
+
+  # Add VirtualBox guest additions
+  services.virtualbox.enable = true;
 }
 
